@@ -1,6 +1,17 @@
 const express = require('express');
+const routes = require('./routes/index.js');
 const app = express();
 const port = 3000;
+
+
+//assigning the router to be used 
+app.use('/',routes);
+
+
+
+
+
+
 
 
 
