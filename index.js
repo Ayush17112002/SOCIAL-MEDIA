@@ -7,7 +7,8 @@ const port = 3000;
 //assigning the router to be used 
 app.use('/',routes);
 
-
+app.set('view engine','ejs');
+app.set('views', './views');
 
 
 

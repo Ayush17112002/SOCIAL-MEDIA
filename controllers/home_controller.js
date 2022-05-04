@@ -1,4 +1,4 @@
 //actions 
 module.exports.home = function(req,res){
-    res.send(`<h1>Express is Up!</h1>`)
+    res.send(`<form action="/" method="post"><button type="submit">Submit</button></form>`);
 }
