@@ -1,4 +1,7 @@
 //actions 
+const path = require('path');
 module.exports.home = function(req,res){
-    res.send(`<form action="/" method="post"><button type="submit">Submit</button></form>`);
+    return res.render('home',{
+        title:"home"
+    });
 }

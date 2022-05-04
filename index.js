@@ -2,13 +2,13 @@ const express = require('express');
 const routes = require('./routes/index.js');
 const app = express();
 const port = 3000;
-
+const path = require('path');
 
 //assigning the router to be used 
 app.use('/',routes);
 
 app.set('view engine','ejs');
-app.set('views', './views');
+app.set('views', path.join(__dirname,"views"));
 
 
 
