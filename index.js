@@ -3,15 +3,18 @@ const routes = require('./routes/index.js');
 const app = express();
 const port = 3000;
 const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static());
 
 //assigning the router to be used 
 app.use('/',routes);
 
 app.set('view engine','ejs');
 app.set('views', path.join(__dirname,"views"));
-
-
-
 
 
 
