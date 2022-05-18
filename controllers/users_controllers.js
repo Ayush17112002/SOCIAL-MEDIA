@@ -3,28 +3,28 @@ const userModel = require('../models/user');
 
 //to check first if user has logged in using cookies then display his profle
 module.exports.profile = function(req,res){
-    if(!req.cookies.user_id){
-        res.redirect('/users/signin');
-    }
-    userModel.findById(req.cookies.user_id,function(err,user){
-        if(user){
-            return res.render('user_profile',{
-                name:user.name,
-                email:user.email
-            });
-        }
-        res.redirect('/users/signin');
-    })
+    return res.render('user_profile',{
+        email:req.user.email,
+        name:req.user.name
+    });
 }
 
 //display sign up page
 module.exports.signup = function(req,res){
-    //return res.sendFile('./views/signup.html',{root:'.'});   
+    //return res.sendFile('./views/signup.html',{root:'.'});
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+    console.log('inside get singup');   
     return res.render('user-sign-up');
 }
 
 //to display sign in page to user
 module.exports.signin = function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+    console.log('inside get singin');
     return res.render('user-sign-in');
 }
 
@@ -57,31 +57,35 @@ module.exports.create = function(req,res){
     }
 }
 
-//to sign in the user if credentials matches and display his profile
-module.exports.createSession = function(req,res){
+//to sign in the user if credentials matches and display his profile manual auth
+// module.exports.createSession = function(req,res){
 
-    userModel.findOne({email:req.body.email},function(err,user){
-        if(err){
-            res.send('error in finding the user');
-        }
-        if(user){
-            if(user.password == req.body.password){
-                console.log(user);
-                res.cookie('user_id',user['_id']);
-                return res.redirect('/users/profile');
-            }else{
-                res.redirect('back');
-            }
-        }else{
-            return res.redirect('back');
-        }
-    });
+//     userModel.findOne({email:req.body.email},function(err,user){
+//         if(err){
+//             res.send('error in finding the user');
+//         }
+//         if(user){
+//             if(user.password == req.body.password){
+//                 console.log(user);
+//                 res.cookie('user_id',user['_id']);
+//                 return res.redirect('/users/profile');
+//             }else{
+//                 res.redirect('back');    
+//             }
+//         }else{
+//             return res.redirect('back');
+//         }
+//     });
+// }
+module.exports.createSession = function(req,res){
+    console.log(req.isAuthenticated());
+    return res.redirect('/');
 }
 
 //clearing cookies and sending user back to home page
 module.exports.signout = function(req,res){
-    if(req.cookies.user_id){
-        res.clearCookie('user_id');
+    if(req.cookies.codeial){
+        res.clearCookie('codeial');
         return res.redirect('/');
     }else{
         res.redirect('/');
