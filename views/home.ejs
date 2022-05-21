@@ -5,6 +5,13 @@
     </title>
 </head>
 <body>
-    <h1>Codeial/<%= title %></h1>
+    <a href="/users/signin">SIGN-IN</a><br>
+    <a href="/users/signup">SIGN-UP</a>
+    <section id="feed-post">
+        <form action="/posts/create" method="POST">
+            <textarea name="new-user-post" cols="30" rows="4" placeholder="Type Here.."></textarea>
+            <input type="Submit">
+        </form>
+    </section>
 </body>
 </html>

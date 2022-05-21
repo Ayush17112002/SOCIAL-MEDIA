@@ -31,12 +31,12 @@ passport.deserializeUser(function(id,cb){
 })
 
 passport.checkAuthentication = function(req,res,next){
-    console.log('inside checkauth');
+    console.log('inside checkauth',req);
     console.log('check',req.isAuthenticated());
     if(req.isAuthenticated()){
         return next();
     }
-    return res.redirect('/users/signin');
+    return res.redirect('back');
 }
 passport.setAuthenticatedUser = function(req,res,next){
      //session, on getting the request, identifies whose session is thi, and attaches the details of that entity in req.user that can be used while req is on the server

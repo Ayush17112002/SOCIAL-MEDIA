@@ -1,5 +1,20 @@
 <h2>Name = <%= name%> </h2>
 <h2>Email = <%= email%> </h2>
+<section id="feed-post">
+    <form action="/posts/create" method="POST">
+        <textarea name="new-user-post" cols="30" rows="4" placeholder="Type Here.."></textarea>
+        <input type="Submit">
+    </form>
+</section>
+<div id="myposts">
+    <ul>
+    <% for(post of posts){ %>
+        <li><%= post.content %> </li>
+        <%= post.user.name%>
+        <br>
+    <% } %>
+    </ul>
+</div>
 <form action="/users/signout" method="get">
 <button type="submit">SIGN OUT</button>
 </form>

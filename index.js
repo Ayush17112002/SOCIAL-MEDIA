@@ -8,13 +8,15 @@ const bodyParser = require('body-parser');
 const session = require('express-session'); //express-session checks for the cookie corresponding to the sessionID stored in db
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const mongoStore = require('connect-mongo');
+
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true})); //extended is used for parsing nested objects which by default is false
 app.set('view engine','ejs');
 app.set('views', path.join(__dirname,"views"));
 app.use(function(req,res,next){
-    console.log(req.session,req.sessionID); next();
+    console.log('###############################',req.session,req.sessionID); next();
 });
 app.use(session({
     name:"codeial",
@@ -23,7 +25,10 @@ app.use(session({
     resave:false,
     cookie:{
         maxAge:(60*10*1000)
-    }
+    },
+    store: mongoStore.create({
+        mongoUrl:'mongodb+srv://Ayush:WYL4JrYUrhcqsSM@cluster0.ts3ep.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'  
+    })
 }));
 app.use(function(req,res,next){
     console.log(req.session,req.sessionID,req.user); next();
