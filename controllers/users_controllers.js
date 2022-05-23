@@ -3,7 +3,10 @@ const postModel = require('../models/post');
 
 //to check first if user has logged in using cookies then display his profle
 module.exports.profile = function(req,res){
-    postModel.find({user:req.user['_id']}).populate('user').exec(function(err,posts){
+    postModel.find({})
+    .populate('user')
+    .populate('comments')
+    .exec(function(err,posts){
         return res.render('user_profile',{
             email:req.user.email,
             name:req.user.name,
@@ -18,7 +21,7 @@ module.exports.signup = function(req,res){
     if(req.isAuthenticated()){
         return res.redirect('/users/profile');
     }
-    console.log('inside get singup');   
+    console.log('inside get sign-up');   
     return res.render('user-sign-up');
 }
 
@@ -88,7 +91,7 @@ module.exports.createSession = function(req,res){
 //clearing cookies and sending user back to home page
 module.exports.signout = function(req,res){
     if(req.cookies.codeial){
-        req.cookies.clear('codeial');
+        res.clearCookie('codeial');
         req.logout();
         return res.redirect('/');
     }else{

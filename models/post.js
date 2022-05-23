@@ -11,7 +11,14 @@ const postSchema = new mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'userModel'
-    }
+    },
+    //to display the comments associated with the post
+    comments:[
+        {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'commentModel'
+        }
+    ]
 },{
     timestamps:true
 });
