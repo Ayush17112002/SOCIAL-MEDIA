@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="/css/user_profile.css">
+<h2>Name = <%= name%> </h2>
+<h2>Email = <%= email%> </h2>
+<section id="feed-post">
+    <form action="/posts/create" method="POST">
+        <textarea name="new-user-post" cols="30" rows="4" placeholder="Type Here to add post.."></textarea>
+        <input type="Submit">
+    </form>
+</section>
+<div id="myposts">
+    <% for(let i = 0; i < posts.length; i++){ %>
+        <div class="post-block">
+            <%= posts[i].user.name%>
+            <%= posts[i].content %>
+            <form action="/comments/create" method="POST">
+                <input type="text" name="content" placeholder="Type Here to add comment...">
+                <input value="<%=posts[i]['_id']%>" name="post" type="hidden">
+                <input type="hidden" name="user" value="<%=posts[i].user['_id']%>">
+                <input type="submit" placeholder="Add Comment">
+            </form>
+            <ul>
+                <% for(let j = 0; j < posts[i].comments.length; j++){%>
+                    <li><%=posts[i].comments[j].content%></li>
+                <%}%>
+            </ul>
+        </div>
+    <% } %>
+</div>
+<form action="/users/signout" method="get">
+<button type="submit">SIGN OUT</button>
+</form>
+</html>

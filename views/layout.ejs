@@ -1,0 +1,18 @@
+<!--layout page gets inherently used by the browser to put the ejs file into layout's body tag-->
+
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="/css/layout.css"> <!--always use express.static() in order to use linked files-->
+        <link rel="stylesheet" href="/css/footer.css">
+        <link rel="stylesheet" href="/css/header.css">
+        <%- style %>
+    </head>
+    <body>
+        <%- include('_header'); %>
+        <div id="layout-main">
+        <%- body %> <!--variable part where 'body' is already defined in library of express-ejs-layouts and on routing of each page, that page gets put into body variable of layout -->
+        </div>
+        <%- include('_footer'); %>
+    </body>
+</html>
