@@ -1,0 +1,17 @@
+header {
+  display: flex;
+  background-color: hwb(240 0% 0%);
+  font-size: 30px;
+  color: white; }
+  header #auth {
+    display: flex;
+    width: 100%;
+    flex-direction: row-reverse; }
+    header #auth #sign-up {
+      margin-left: 20px;
+      margin-right: 2px; }
+  header a {
+    color: white;
+    text-decoration: none; }
+  header a:hover {
+    color: black; }
