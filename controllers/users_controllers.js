@@ -3,14 +3,19 @@ const postModel = require('../models/post');
 
 //to check first if user has logged in using cookies then display his profle
 module.exports.profile = function(req,res){
-    postModel.find({})
-    .populate('user')
+    console.log('in profile');
+    postModel.find({}) //fetching all the records
+    .populate('user') //this is the column name/key name in the schema of posts and we are populating this key of every post with the details of that user who posted it and this functionality has been defined in the schema of posts
     .populate('comments')
-    .exec(function(err,posts){
+    .exec(function(err,posts){  
+        if(err){
+            return res.redirect('back');
+        }
         return res.render('user_profile',{
             email:req.user.email,
             name:req.user.name,
-            posts:posts
+            posts:posts, //this is the populated collection of posts
+            loginUser : req.session.passport.user
         });
     })
 }
@@ -30,7 +35,7 @@ module.exports.signin = function(req,res){
     if(req.isAuthenticated()){
         return res.redirect('/users/profile');
     }
-    console.log('inside get singin');
+    console.log('inside get signin');
     return res.render('user-sign-in');
 }
 
@@ -46,7 +51,7 @@ module.exports.create = function(req,res){
                 return res.send('error in signing up the user');
             }else{
                 if(user){
-                    return res.redirect('/create/sign-in');
+                    return res.redirect('/users/signin');
                 }else{
                     //singup the user
                     userModel.create(req.body,function(err,user){

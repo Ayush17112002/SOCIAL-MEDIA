@@ -9,18 +9,21 @@ const session = require('express-session'); //express-session checks for the coo
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const mongoStore = require('connect-mongo');
+//sass middleware used to convert sass code into css as browser understands only css
 const sass = require('node-sass-middleware');
+
+//it is used to syntatically put the ejs file into body tag of html page
 const expressLayouts = require('express-ejs-layouts');
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true})); //extended is used for parsing nested objects which by default is false
 app.use(express.static('./assets'))
 app.use(expressLayouts);
 
-//it allows the usage of 'style' variable in layout ejs file so that whenver main ejs file is rendered, the css file it wanted gets put into layout file in place of 'script' variable name
+//it allows the usage of 'style' variable in layout ejs file so that whenver main ejs file is rendered, the css file it wanted gets put into layout file in place of 'style' variable name
 app.set("layout extractStyles", true); 
 
 
-//it ensures the scripts are loaded at the end of the ejs file u are trying to load
+//it ensures the scripts are loaded at the end of the ejs file u are trying to load into the 'SCRIPT' variable
 app.set("layout extractScripts", true);
 
 
@@ -36,11 +39,6 @@ app.set('view engine','ejs');
 app.set('views', path.join(__dirname,"views"));
 
 
-
-
-app.use(function(req,res,next){
-    console.log('###############################',req.session,req.sessionID); next();
-});
 app.use(session({
     name:"codeial",
     secret:"blahsomething", //secret key used to generate hash of this session 
@@ -53,15 +51,13 @@ app.use(session({
         mongoUrl:'mongodb+srv://Ayush:WYL4JrYUrhcqsSM@cluster0.ts3ep.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'  
     })
 }));
-app.use(function(req,res,next){
-    console.log(req.session,req.sessionID,req.user); next();
-});
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/',routes);
 app.use(function(req,res,next){
-    console.log(req.session,req.sessionID); next();
-});
+    console.log(req.session);
+    next();
+})
+app.use('/',routes);
 app.listen(port,function(err){
     if(err) console.log(`Error in running the the Server: ${err}`);
     else{

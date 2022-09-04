@@ -10,17 +10,27 @@
 <div id="myposts">
     <% for(let i = 0; i < posts.length; i++){ %>
         <div class="post-block">
+            <% console.log(loginUser, posts[i].user.id)%>
+            <% if(posts[i].user['_id'] == loginUser){%>
+                <form action="/posts/destroy/<%= posts[i]['_id']%>">
+                    <button>Delete</button>
+                </form>
+            <%}%>
             <%= posts[i].user.name%>
             <%= posts[i].content %>
             <form action="/comments/create" method="POST">
                 <input type="text" name="content" placeholder="Type Here to add comment...">
                 <input value="<%=posts[i]['_id']%>" name="post" type="hidden">
-                <input type="hidden" name="user" value="<%=posts[i].user['_id']%>">
+                <input type="hidden" name="user" value="<%=loginUser%>">
                 <input type="submit" placeholder="Add Comment">
             </form>
             <ul>
                 <% for(let j = 0; j < posts[i].comments.length; j++){%>
                     <li><%=posts[i].comments[j].content%></li>
+                    <% console.log("comments",posts[i].comments[j].user['_id'],loginUser) %>
+                    <% if(posts[i].comments[j].user['_id'] == loginUser){%>
+                        <a href="/comments/destroy/<%= posts[i].comments[j]['_id']%>">Delete the Comment.</a>
+                    <%}%>
                 <%}%>
             </ul>
         </div>
