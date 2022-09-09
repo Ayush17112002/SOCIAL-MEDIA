@@ -17,6 +17,10 @@ passport.use(new LocalStrategy({
 //When you use sessions with Passport, as soon as a user gets appropriately authenticated, a new session begins. When this transpires, we serialize the user data to the session and the user ID is stored in req.session.passport.user.
 passport.serializeUser(function(user,cb){
     console.log('inside serial');
+    /*
+    1. error->null
+    2. userID
+    */
     return cb(null,user['_id']);
 });
 

@@ -6,10 +6,11 @@
         <link rel="stylesheet" href="/css/layout.css"> <!--always use express.static() in order to use linked files-->
         <link rel="stylesheet" href="/css/footer.css">
         <link rel="stylesheet" href="/css/header.css">
-        <%- style %>
+        <%- style %> <!--<%- %> this syntax is used for writing variable names.. here the css files that the page wants would be kept i.e. after the css applied to layout -->
     </head>
     <body>
-        <%- include('_header'); %>
+        <!--this will first paste the code of _header file and then sends it to the browser-->
+        <%- include('./_header') %>
         <div id="layout-main">
         <%- body %> <!--variable part where 'body' is already defined in library of express-ejs-layouts and on routing of each page, that page gets put into body variable of layout -->
         </div>

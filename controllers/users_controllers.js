@@ -3,14 +3,19 @@ const postModel = require('../models/post');
 
 //to check first if user has logged in using cookies then display his profle
 module.exports.profile = function(req,res){
+    console.log('in profile');
     postModel.find({}) //fetching all the records
     .populate('user') //this is the column name/key name in the schema of posts and we are populating this key of every post with the details of that user who posted it and this functionality has been defined in the schema of posts
     .populate('comments')
-    .exec(function(err,posts){
+    .exec(function(err,posts){  
+        if(err){
+            return res.redirect('back');
+        }
         return res.render('user_profile',{
             email:req.user.email,
             name:req.user.name,
-            posts:posts //this is the populated collection of posts
+            posts:posts, //this is the populated collection of posts
+            loginUser : req.session.passport.user
         });
     })
 }

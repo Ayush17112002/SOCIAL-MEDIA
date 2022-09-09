@@ -16,6 +16,10 @@ header{
         color: white;
         text-decoration: none;
     }
+    /*
+    pseudo class(:) -> psedo means false class on anchor tag..
+    So using pseudo classes it can act like an actual class has been tagged with the anchor element
+    */
     a:hover{
         color: black;
     }

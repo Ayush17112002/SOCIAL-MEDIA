@@ -23,7 +23,7 @@ app.use(expressLayouts);
 app.set("layout extractStyles", true); 
 
 
-//it ensures the scripts are loaded at the end of the ejs file u are trying to load
+//it ensures the scripts are loaded at the end of the ejs file u are trying to load into the 'SCRIPT' variable
 app.set("layout extractScripts", true);
 
 
@@ -37,11 +37,7 @@ app.use(sass({
 
 app.set('view engine','ejs');
 app.set('views', path.join(__dirname,"views"));
-app.use(function(req,res,next){
-    //console.log(req);
-    console.log(req);
-    next();
-});
+
 
 app.use(session({
     name:"codeial",
@@ -57,6 +53,10 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(function(req,res,next){
+    console.log(req.session);
+    next();
+})
 app.use('/',routes);
 app.listen(port,function(err){
     if(err) console.log(`Error in running the the Server: ${err}`);
