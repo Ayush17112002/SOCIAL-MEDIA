@@ -77,8 +77,10 @@ module.exports.createSession = function (req, res) {
 
 //clearing cookies and sending user back to home page
 module.exports.signout = function (req, res) {
+  console.log(req.cookies);
+  res.clearCookie("codeial");
   if (req.cookies.codeial) {
-    res.clearCookie("codeial");
+    console.log("inside logout");
     req.logout();
     return res.redirect("/");
   } else {
