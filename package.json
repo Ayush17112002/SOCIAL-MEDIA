@@ -10,7 +10,6 @@
   "author": "Ayush Gupta",
   "license": "ISC",
   "dependencies": {
-    "alert": "^5.0.10",
     "body-parser": "^1.20.0",
     "connect-mongo": "^4.6.0",
     "cookie-parser": "^1.4.6",
@@ -19,10 +18,8 @@
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.2",
     "mongoose": "^6.6.2",
-    "node-sass-middleware": "^1.0.1",
     "nodemon": "^2.0.16",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
-    "popups": "^1.1.3"
   }
 }
