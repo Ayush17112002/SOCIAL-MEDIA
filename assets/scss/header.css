@@ -3,24 +3,24 @@ header{
     background-color: hwb(240 0% 0%);
     font-size: 30px;
     color: white;
-    #auth{
-        display: flex;
-        width: 100%;
-        flex-direction: row-reverse;
-        #sign-up{
-            margin-left: 20px;
-            margin-right: 2px;
-        }
-    }
-    a{
-        color: white;
-        text-decoration: none;
-    }
+}
+#auth{
+    display: flex;
+    width: 100%;
+    flex-direction: row-reverse;
+}
+#sign-up{
+    margin-left: 20px;
+    margin-right: 2px;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
     /*
     pseudo class(:) -> psedo means false class on anchor tag..
     So using pseudo classes it can act like an actual class has been tagged with the anchor element
     */
-    a:hover{
+a:hover{
         color: black;
     }
-}
