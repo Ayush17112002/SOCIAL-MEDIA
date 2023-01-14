@@ -9,8 +9,6 @@ const session = require("express-session"); //express-session checks for the coo
 const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
 const mongoStore = require("connect-mongo");
-//sass middleware used to convert sass code into css as browser understands only css
-const sass = require("node-sass-middleware");
 
 //it is used to syntatically put the ejs file into body tag of html page
 const expressLayouts = require("express-ejs-layouts");
@@ -24,17 +22,6 @@ app.set("layout extractStyles", true);
 
 //it ensures the scripts are loaded at the end of the ejs file u are trying to load into the 'SCRIPT' variable
 app.set("layout extractScripts", true);
-
-app.use(
-  sass({
-    src: "./assets/scss",
-    dest: "./assets/css",
-    debug: true,
-    outputStyle: "extended",
-    prefix: "/css",
-  })
-);
-
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
